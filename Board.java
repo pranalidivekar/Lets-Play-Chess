@@ -12,7 +12,6 @@
  * This program determines the maximum number of kings you can put on the traditional (nxn) chess 
  * board, such that no king is in check.
  *
- * @author      Sharvai Patil (sp4479@g.rit.edu)
  * @author      Pranali Divekar (pd1267@g.rit.edu)
  */
 
@@ -98,11 +97,6 @@ public class Board{
 					else
 						ob.lessThanFourMakeBoard();
 
-					// print this solution
-					// System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
-					// System.out.println("Kings placed = "+ob.currentKings);
-					// ob.printBoard(ob.currentBoard);
-
 					// check for max
 					ob.checkMax();
 					
@@ -135,16 +129,15 @@ public class Board{
 	*/
 	void recursiveMakeBoard(){
 
-		// Base case: if we stumble upon a cell which already has a King in it
-		// we end the recursion
+		// Base case: if a cell already has a King in it
+		// end the recursion
 		if(currentBoard[row][column]=='K')
 			return;
 
 		// test (row, column) if it isn't blocked
 		if(currentBoard[row][column]!='.'){
 			
-			// Now for every cell, we will check if it is valid to place a King in it
-			// the case when we are testing for the first row
+			// Now for every cell, check if it is valid to place a King in it
 			if(row==0){		
 				if(column==0){
 					// this is (0,0)
@@ -155,7 +148,6 @@ public class Board{
 					}
 				}
 				else if(column==currentBoard[0].length-1){
-					// this is (0,5)
 					if(currentBoard[row][column-1]!='K' && currentBoard[row+1][column]!='K' 
 					   && currentBoard[row+1][column-1]!='K'){
 						currentBoard[row][column]='K';
@@ -163,7 +155,6 @@ public class Board{
 					}
 				}
 				else{
-					// this is to test blocks from (0,1) to (0,4)
 					if(currentBoard[row][column-1]!='K' && currentBoard[row][column+1]!='K' 
 					   && currentBoard[row+1][column-1]!='K' && currentBoard[row+1][column+1]!='K'
 					   && currentBoard[row+1][column]!='K'){
@@ -172,10 +163,8 @@ public class Board{
 					}
 				}
 			}
-			// the case when we are testing for the last row
 			else if(row==currentBoard.length-1){
 				if(column==0){
-					// this is (5,0)
 					if(currentBoard[row][column+1]!='K' && currentBoard[row-1][column]!='K' 
 					   && currentBoard[row-1][column+1]!='K' ){
 						currentBoard[row][column]='K';
@@ -183,7 +172,6 @@ public class Board{
 					}
 				}
 				else if(column==currentBoard[0].length-1){
-					// this is (5,5)
 					if(currentBoard[row][column-1]!='K' && currentBoard[row-1][column]!='K' 
 					   && currentBoard[row-1][column-1]!='K'){
 						currentBoard[row][column]='K';
@@ -191,7 +179,6 @@ public class Board{
 					}
 				}
 				else{
-					// this is to test blocks from (5,1) to (5,4)
 					if(currentBoard[row][column-1]!='K' && currentBoard[row][column+1]!='K' 
 					   && currentBoard[row-1][column]!='K' && currentBoard[row-1][column+1]!='K' 
 					   && currentBoard[row-1][column-1]!='K'){
@@ -200,10 +187,8 @@ public class Board{
 					}
 				}
 			}
-			// the case where we are testing for all the rows in between
 			else{
 				if(column==0){
-					// this is (row,0)
 					if(currentBoard[row][column+1]!='K' && currentBoard[row-1][column]!='K' 
 					   && currentBoard[row-1][column+1]!='K' && currentBoard[row+1][column]!='K' 
 					   && currentBoard[row+1][column+1]!='K'){
@@ -212,7 +197,6 @@ public class Board{
 					}
 				}
 				else if(column==currentBoard[0].length-1){
-					// this is (row,5)
 					if(currentBoard[row][column-1]!='K' && currentBoard[row-1][column]!='K' 
 					   && currentBoard[row-1][column-1]!='K' && currentBoard[row+1][column]!='K' 
 					   && currentBoard[row+1][column-1]!='K'){
@@ -221,7 +205,6 @@ public class Board{
 					}
 				}
 				else{
-					// this is to test blocks from (row,1) to (row,4)
 					if(currentBoard[row][column-1]!='K' && currentBoard[row][column+1]!='K' 
 					   && currentBoard[row-1][column]!='K' && currentBoard[row-1][column+1]!='K' 
 					   && currentBoard[row-1][column-1]!='K' && currentBoard[row+1][column-1]!='K' 
@@ -233,10 +216,6 @@ public class Board{
 			}
 		}
 
-		// changing our coordinates so that we point to the next cell
-		// if we reach the last column, we jump to the next row, first column
-		// if we reach the last cell of the board, we jump to the first
-		column+=1;
 		if(column==currentBoard[0].length){
 			column=0;
 			row+=1;
